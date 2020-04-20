@@ -1,0 +1,10 @@
+<mat-card (click)="showDetails()">
+    <mat-card-header>
+        <mat-card-title>{{guia.titulo}}</mat-card-title>
+        <img mat-card-avatar [src]="guia.tipo.icono.rutaDeDescarga" [alt]="guia.tipo.nombre">
+        <mat-card-subtitle class="guia-subtitulo">{{guia.tipo.nombre}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div [innerHTML]="descripcionComoHTML(guia.descripcion)"></div>
+    </mat-card-content>
+</mat-card>

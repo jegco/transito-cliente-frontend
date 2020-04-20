@@ -1,0 +1,11 @@
+.guias-container {
+    background-color: #eee;
+    width: 96%;
+    padding: 2%;
+}
+
+.spinner {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}

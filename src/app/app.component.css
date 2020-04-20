@@ -1,0 +1,76 @@
+.subtitulo {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+.titulo {
+    font-family: 'Open Sans condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.titulo-container {
+    display: flex;
+    margin: 1% 2% 1% 0;
+    height: 70%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    grid-column: span 2;
+}
+
+.toolbar-spacer {
+    flex: 1 1 1;
+}
+
+.datt-logo {
+    width: 5%;
+    height: 70%;
+    padding: 1%;
+}
+
+.toolbar {
+    background: #14850C;
+    color: white;
+}
+
+.toolbar-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: 10%;
+}
+
+.search-input-toolbar {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+
+.search-input-field {
+    width: 95%;
+}
+
+.search-icon-toolbar {
+    color: white;
+}
+
+.search-input-button {
+    background-color: #14850C;
+    border: transparent;
+}
+
+.main-container {
+    background-color: #eee;
+    margin: 1%;
+}
+
+.container {
+    width: 100%;
+    background-color: #eee;
+}
