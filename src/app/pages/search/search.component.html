@@ -11,8 +11,6 @@
                 </button>
             </mat-form-field>
             <button mat-raised-button (click)="search()" class="search-btn">Buscar</button>
-            <p [style.display]="errorMessage ? 'block' : 'none'" [className]="'error'">{{ errorMessage }}</p>
-            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'" class="spinner"></mat-spinner>
         </form>
     </div>
 </div>
