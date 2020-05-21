@@ -16,7 +16,6 @@ export class GuiaItemComponent implements OnInit {
   constructor(private readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.guia.tipo.icono.rutaDeDescarga = `http://${this.guia.tipo.icono.rutaDeDescarga}`;
   }
 
   showDetails(): void {

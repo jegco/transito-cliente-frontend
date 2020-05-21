@@ -16,6 +16,10 @@
     justify-content: flex-start;
 }
 
+.guia-detalles-container, .mapa-card {
+  margin: 1%;
+}
+
 .guia-detalle-header-image p {
     position: relative;
     top: 10%;

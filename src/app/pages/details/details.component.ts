@@ -98,11 +98,11 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
 
   obtenerImagenes = (documentos: Documento[]): Array<any> => {
     return documentos
-      .filter(documento => documento.extension === 'jpg ' || documento.extension === 'png ')
+      .filter(documento => documento.extension === 'jpg' || documento.extension === 'png')
       .map(documento => {
         return {
-          image: `http://${documento.rutaDeDescarga}`,
-          thumbImage: `http://${documento.rutaDeDescarga}`,
+          image: documento.rutaDeDescarga,
+          thumbImage: documento.rutaDeDescarga,
           alt: documento.nombre,
           title: documento.nombre
         }
@@ -111,11 +111,11 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
 
   obtenerVideos = (documentos: Documento[]): Array<any> => {
     return documentos
-      .filter(documento => documento.extension === 'mp4 ')
+      .filter(documento => documento.extension === 'mp4')
       .map(documento => {
         return {
-          image: `http://${documento.rutaDeDescarga}`,
-          thumbImage: `http://${documento.rutaDeDescarga}`,
+          image: documento.rutaDeDescarga,
+          thumbImage: documento.rutaDeDescarga,
           alt: documento.nombre,
           title: documento.nombre
         }
@@ -123,7 +123,7 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
   }
 
   obtenerArchivos = (documentos: Documento[]): Array<any> => {
-    return this.archivos = documentos.filter(documento => documento.extension === 'pdf ');
+    return this.archivos = documentos.filter(documento => documento.extension === 'pdf');
   }
 
   descargarArchivo = (documento: Documento): void => {

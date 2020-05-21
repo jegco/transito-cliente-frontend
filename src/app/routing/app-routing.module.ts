@@ -8,7 +8,8 @@ import { DetailsComponent } from '../pages/details/details.component';
 const routes: Routes = [
   {path: 'search/:searchParam', component: DashboardComponent},
   {path: 'details/:nombreGuia', component: DetailsComponent},
-  {path: '', component: SearchComponent}
+  {path: '', component: SearchComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

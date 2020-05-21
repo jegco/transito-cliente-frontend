@@ -30,6 +30,10 @@
     align-items: center;
 }
 
+.search-form * {
+    margin: 1%;
+}
+
 .search-icon {
     margin: 0 0 0 5%;
 }

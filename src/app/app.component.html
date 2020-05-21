@@ -7,7 +7,7 @@
                     <span class="titulo">Guias de tramites</span>
                     <span class="subtitulo">Transito de Cartagena</span>
                 </div>
-                <form class="search-input-toolbar" (keydown.enter)="navigate()">
+                <form class="search-input-toolbar" *ngIf="displaySearch" (keydown.enter)="navigate()">
                     <input placeholder="Buscar por palabra que haga referencia" [(ngModel)]="searchValue"
                         name="search" class="search-input-field"/>
                     <button class="search-input-button"
@@ -26,7 +26,7 @@
             </mat-toolbar-row>
         </mat-toolbar>
     </div>
-    <div class="main-container">
+    <div class="content-container">
         <router-outlet></router-outlet>
     </div>
 </div>
