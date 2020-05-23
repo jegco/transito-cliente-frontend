@@ -7,45 +7,18 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './paso.component.html',
   styleUrls: ['./paso.component.css']
 })
-export class PasoComponent implements OnInit {
+export class PasoComponent {
 
   @Input()
   paso: Paso;
 
   @Input()
   index: number;
-  imagenes: Array<any>;
-  videos: Array<any>;
-  archivos: Array<any>;
 
   constructor(private readonly sanitizer: DomSanitizer) { }
 
-  ngOnInit() {
-    this.imagenes = this.paso.anexos.filter(documento => documento.extension === 'jpg ' || documento.extension === 'png ')
-    .map(documento => {
-      return {
-        image: `http://${documento.rutaDeDescarga}`,
-        thumbImage: `http://${documento.rutaDeDescarga}`,
-        alt: documento.nombre,
-        title: documento.nombre
-      }
-    });
-
-    this.videos = this.paso.anexos.filter(documento => documento.extension === 'mp4 ')
-    .map(documento => {
-      return {
-        image: `http://${documento.rutaDeDescarga}`,
-        thumbImage: `http://${documento.rutaDeDescarga}`,
-        alt: documento.nombre,
-        title: documento.nombre
-      }
-    });
-
-    this.archivos = this.paso.anexos.filter(documento => documento.extension === 'pdf')
-  }
-
-  descripcionComoHTML = (descripcion: string) => {
-    return this.sanitizer.bypassSecurityTrustHtml(descripcion);
+  descripcionComoHTML = (paso: Paso) => {
+    return this.sanitizer.bypassSecurityTrustHtml(paso.descripcion);
   }
 
 }

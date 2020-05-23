@@ -1,3 +1,23 @@
 .guia-card {
     margin: 2%;
 }
+
+.guia-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tipo-chip {
+    background-color: #E7E7E7;
+    padding: 5px;
+    color: grey;
+    margin: 2px;
+}
+
+.guia-card-subtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}

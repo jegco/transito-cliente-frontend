@@ -1,19 +1,38 @@
-.guia-detalle-header-image p {
-    position: relative;
-    top: 10%;
-    transform: translateY(-50%);
-}
-
 .guia-detalle-header-image {
-    position: absolute;
-    margin-top: -30px;
-    border-color: #8B7F7F;
-    border-style: solid;
-    margin-left: -30px;
-    background-color: white;
-    text-align: center;
+    width: 0;
+    height: 0;
+    border-top: 60px solid transparent;
+    border-bottom: 60px solid transparent;
+    border-left: 60px solid green;
+    margin-right: 1%;
 }
 
 .guia-pasos-card {
     margin: 1%;
+}
+
+.guia-detalle-paso {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1%;
+}
+
+.paso-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.numero-paso {
+    font-size: 40px;
+    top: -60px;
+    position: relative;
+    left: -50px;
+    color: white;
+}
+
+.paso-descripcion {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

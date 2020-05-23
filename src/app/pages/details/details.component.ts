@@ -1,12 +1,12 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/errors/services/error.service';
 import { ToastrService } from 'ngx-toastr';
-import { map, switchMap, catchError, tap } from 'rxjs/operators';
+import { map, switchMap, catchError, finalize } from 'rxjs/operators';
 import { GuiaDeTramite } from 'src/app/models/GuiaDeTramite';
 import { GuiasService } from 'src/app/providers/guias/guias.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PuntoAtencion } from 'src/app/models/PuntoAtencion';
 import { Documento } from 'src/app/models/Documento';
 import { of, Observable } from 'rxjs';
@@ -19,45 +19,50 @@ declare var H: any;
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class DetailsComponent extends BaseComponent implements OnInit, DoCheck {
 
   guia$: Observable<GuiaDeTramite>;
-  imagenes: Array<any>;
-  archivos: Array<Documento>;
-  videos: Array<any>;
+  mapRendered: Observable<boolean>;
   descripcion = {};
   platform: any;
   map: any;
 
-  @ViewChild("map", { static: false })
+  @ViewChild('map', { static: false })
   mapElement: ElementRef;
 
-  constructor(public readonly router: Router,
-              public readonly errorService: ErrorService,
-              public readonly toast: ToastrService,
-              private activatedRoute: ActivatedRoute,
-              private guiasService: GuiasService,
-              private readonly documentosService: DocumentosService,
-              private readonly sanitizer: DomSanitizer) {
+  constructor(
+    public readonly router: Router,
+    public readonly errorService: ErrorService,
+    public readonly toast: ToastrService,
+    private activatedRoute: ActivatedRoute,
+    private guiasService: GuiasService,
+    private readonly documentosService: DocumentosService,
+    private readonly sanitizer: DomSanitizer) {
     super(router, errorService, toast);
     this.platform = new H.service.Platform({
-      "apikey": "BNBi1cMp5htkcfPgw6a6HBPF06ymGygntZdlmEdPTZw"
+      apikey: 'BNBi1cMp5htkcfPgw6a6HBPF06ymGygntZdlmEdPTZw'
     });
   }
 
   ngOnInit() {
+    this.mapRendered = of(false);
     this.guia$ = this.activatedRoute.params
-    .pipe(
-      map(params => params['nombreGuia']),
-      switchMap(nombre => this.guiasService.buscarGuiaPorTitulo(nombre)),
-      tap(guia => this.obtenerMultimedia(guia.formularios)),
-      catchError(error => {
-        this.handleException(error);
-        return of<GuiaDeTramite>();
-      }));
+      .pipe(
+        map(params => params.nombreGuia),
+        switchMap(nombre => this.guiasService.buscarGuiaPorTitulo(nombre)),
+        catchError(error => {
+          this.handleException(error);
+          return of<GuiaDeTramite>();
+        }));
   }
 
-  ngAfterViewInit() {
+  ngDoCheck() {
+    // if (this.mapElement) {
+    //   this.initMap();
+    // }
+  }
+
+  initMap() {
     const defaultLayers = this.platform.createDefaultLayers();
     this.map = new H.Map(
       this.mapElement.nativeElement,
@@ -74,10 +79,10 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
     const behavior = new H.mapevents.Behavior(mapEvents);
 
     const ui = H.ui.UI.createDefault(this.map, defaultLayers);
-}
+  }
 
-  descripcionComoHTML = (guia: GuiaDeTramite) => {
-    this.añadirMarcador(guia.puntosDeAtencion);
+  descripcionComoHTML = (guia: GuiaDeTramite): SafeHtml => {
+    // this.añadirMarcador(guia.puntosDeAtencion);
     return this.sanitizer.bypassSecurityTrustHtml(guia.descripcion);
   }
 
@@ -87,60 +92,25 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
         lat: punto.latitud,
         lng: punto.longitud
       }));
-    })
-  }
-
-  obtenerMultimedia = (documentos: Documento[]) => {
-    this.imagenes = this.obtenerImagenes(documentos);
-    this.videos = this.obtenerVideos(documentos);
-    this.archivos = this.obtenerArchivos(documentos);
-  }
-
-  obtenerImagenes = (documentos: Documento[]): Array<any> => {
-    return documentos
-      .filter(documento => documento.extension === 'jpg' || documento.extension === 'png')
-      .map(documento => {
-        return {
-          image: documento.rutaDeDescarga,
-          thumbImage: documento.rutaDeDescarga,
-          alt: documento.nombre,
-          title: documento.nombre
-        }
-      })
-  }
-
-  obtenerVideos = (documentos: Documento[]): Array<any> => {
-    return documentos
-      .filter(documento => documento.extension === 'mp4')
-      .map(documento => {
-        return {
-          image: documento.rutaDeDescarga,
-          thumbImage: documento.rutaDeDescarga,
-          alt: documento.nombre,
-          title: documento.nombre
-        }
-      });
-  }
-
-  obtenerArchivos = (documentos: Documento[]): Array<any> => {
-    return this.archivos = documentos.filter(documento => documento.extension === 'pdf');
+    });
+    // const informacion = this.construirformacionDelMarcador(latitud, longitud);
+    // ui.addBubble(informacion);
   }
 
   descargarArchivo = (documento: Documento): void => {
     this.documentosService.descargarDocumento(documento).subscribe(
       data => {
-        const blob = new Blob([data], { type: "application/pdf" })
+        const blob = new Blob([data], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
         link.download = documento.nombre;
         link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 
-        setTimeout(function () {
-            window.open(url);
-            link.remove();
+        setTimeout(() => {
+          window.open(url);
+          link.remove();
         }, 100);
       }, error => this.handleException(error));
   }
-
 }

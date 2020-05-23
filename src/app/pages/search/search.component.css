@@ -1,15 +1,29 @@
 .main-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: white;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     height: 100%;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .search-container {
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
+    width: 60%;
+    height: 70vh;
 }
 
 .logo {
@@ -25,7 +39,7 @@
 
 .search-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -40,6 +54,9 @@
 
 .search-input {
     width: 80%;
+    height: 5vh;
+    background-color: #E7E7E7;
+    border: none;
 }
 
 @media screen and (min-width:1024px) {
@@ -49,13 +66,14 @@
         align-items: center;
         width: 100%;
     }
-  }
+}
 
 ::placeholder {
     color: grey;
     opacity: 1;
 }
-.error{
+
+.error {
     color: red
 }
 

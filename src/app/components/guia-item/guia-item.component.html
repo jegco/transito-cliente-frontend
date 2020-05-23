@@ -1,4 +1,4 @@
-<mat-card class="guia-card" (click)="showDetails()">
+<!-- <mat-card class="guia-card" (click)="showDetails()">
     <mat-card-header>
         <mat-card-title>{{guia.titulo}}</mat-card-title>
         <img mat-card-avatar [src]="guia.tipo.icono.rutaDeDescarga" [alt]="guia.tipo.nombre">
@@ -7,4 +7,18 @@
     <mat-card-content>
         <div [innerHTML]="descripcionComoHTML(guia.descripcion)"></div>
     </mat-card-content>
-</mat-card>
+</mat-card> -->
+
+<div class="guia-card" (click)="showDetails()">
+    <div class="guia-card-header">
+        <h3>{{guia.titulo}}</h3>
+        <span class="tipo-chip">{{guia.tipo.nombre}}</span>
+    </div>
+    <div class="guia-card-content">
+        <div class="guia-card-subtitle">
+            <div *ngFor="let puntoAtencion of guia.puntosDeAtencion" class="tipo-chip">{{puntoAtencion.nombre}}</div>
+        </div>
+        <p class="guia-card-descripcion" [innerHTML]="descripcionComoHTML(guia.descripcion)"></p>
+    </div>
+    <mat-divider></mat-divider>
+</div>

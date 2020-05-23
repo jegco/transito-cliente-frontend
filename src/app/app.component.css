@@ -35,6 +35,11 @@
 .toolbar {
     background: #14850C;
     color: white;
+    height: 100%;
+}
+
+.toolbar-row {
+    height: 100%;
 }
 
 .toolbar-container {
@@ -67,6 +72,7 @@
 
 .content-container {
     height: 90%;
+    background-color: white;
 }
 
 .container {

@@ -15,10 +15,7 @@ export class TiposService {
 
   constructor(private readonly http: HttpService) { }
 
-  buscarTipos = (): Observable<Tipo> => {
-    return this.http.get<Tipo[]>(this.url)
-    .pipe(
-      concatAll()
-    );
+  buscarTipos = (): Observable<Tipo[]> => {
+    return this.http.get<Tipo[]>(this.url);
   }
 }

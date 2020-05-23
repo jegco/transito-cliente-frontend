@@ -18,7 +18,6 @@ export class PreferenciasService {
     return this.http.get<PreferenciasDeUsuario>(this.url)
     .pipe(
       tap(preferencias => {
-        debugger;
         localStorage.setItem('nombreAnimacion', preferencias.animacion.nombre);
         localStorage.setItem('tiempoEspera', preferencias.animacion.tiempoDeEspera + '');
         localStorage.setItem('tiempoAnimacion', preferencias.animacion.tiempoDeAnimacion + '');

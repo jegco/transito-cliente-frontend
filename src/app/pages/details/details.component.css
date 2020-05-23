@@ -1,11 +1,31 @@
-.guia-detalle-header-image {
-    position: absolute;
-    margin-top: -30px;
-    border-color: #8B7F7F;
-    border-style: solid;
-    margin-left: -30px;
+.guia-detalles-content {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    padding: 0 5% 0 5%;
     background-color: white;
-    text-align: center;
+}
+
+.guia-detalles-container {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+
+.descripcion-guia-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.descripcion-guia {
+    width: 70%;
+}
+
+.soporte-legal-container {
+    /* background-color: grey; */
+    width: 30%;
+    padding: 1%;
 }
 
 .mapa-container {
@@ -16,8 +36,8 @@
     justify-content: flex-start;
 }
 
-.guia-detalles-container, .mapa-card {
-  margin: 1%;
+.mapa-card {
+    margin: 1%;
 }
 
 .guia-detalle-header-image p {
@@ -42,28 +62,28 @@
     height: 70%;
     justify-content: flex-start;
     align-content: center;
-  }
-  
-  .pdf-icon {
+}
+
+.pdf-icon {
     width: 95%;
     margin-top: 10%;
-  }
-  
-  .pdf-nombre {
+}
+
+.pdf-nombre {
     text-align: center;
     padding: 0;
     margin: 0;
     width: inherit;
     background-color: green;
-    height: 20%; 
-  }
-  
-  .pdf-nombre p {
+    height: 20%;
+}
+
+.pdf-nombre p {
     color: white;
-  }
-  
-  .pdf-card {
+}
+
+.pdf-card {
     width: 100px;
     margin: 0;
     padding: 0;
-  }
+}

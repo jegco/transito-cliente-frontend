@@ -1,28 +1,21 @@
 <div class="container">
     <div class="toolbar-container">
         <mat-toolbar class="toolbar">
-            <mat-toolbar-row>
+            <mat-toolbar-row class="toolbar-row">
                 <img src="../../../assets/img/DATT.png" class="datt-logo">
                 <div class="titulo-container">
                     <span class="titulo">Guias de tramites</span>
                     <span class="subtitulo">Transito de Cartagena</span>
                 </div>
-                <form class="search-input-toolbar" *ngIf="displaySearch" (keydown.enter)="navigate()">
-                    <input placeholder="Buscar por palabra que haga referencia" [(ngModel)]="searchValue"
-                        name="search" class="search-input-field"/>
-                    <button class="search-input-button"
-                    (click)="navigate()">
-                        <mat-icon class="search-icon-toolbar">search</mat-icon>
-                </button>
-                </form>
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu por tipos">
+
+                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu por tipos">
                     tipos
                   </button>
                   <mat-menu #menu="matMenu">
                     <button mat-menu-item *ngIf="tipos$ | async as tipo">
                       <span>{{ tipo.nombre }}</span>
                     </button>
-                  </mat-menu>
+                  </mat-menu> -->
             </mat-toolbar-row>
         </mat-toolbar>
     </div>

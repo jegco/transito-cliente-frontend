@@ -14,12 +14,13 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import {
   MatButtonModule, MatCardModule, MatInputModule, MatTableModule,
   MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule,
-  MatExpansionModule, MatDividerModule
+  MatExpansionModule, MatDividerModule, MatSelectModule
 } from '@angular/material';
 import { BaseComponent } from './pages/base/base.component';
 import { GuiaItemComponent } from './components/guia-item/guia-item.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PasoComponent } from './components/paso/paso.component';
+import { MultimediaComponent } from './components/multimedia/multimedia.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PasoComponent } from './components/paso/paso.component';
     DashboardComponent,
     BaseComponent,
     GuiaItemComponent,
-    PasoComponent
+    PasoComponent,
+    MultimediaComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { PasoComponent } from './components/paso/paso.component';
     MatMenuModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
+    MatSelectModule,
     MatTableModule,
     ToastrModule,
     MatDividerModule
