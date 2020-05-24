@@ -8,6 +8,11 @@
     align-content: center;
 }
 
+.anexo {
+    width: 100%;
+    height: 100%;
+}
+
 .pdf-icon {
     width: 95%;
     margin-top: 10%;
@@ -144,6 +149,12 @@
 /* 100% Image Width on Smaller Screens */
 
 @media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 700px) {
     .modal-content {
         width: 100%;
     }

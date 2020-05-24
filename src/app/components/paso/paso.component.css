@@ -36,3 +36,12 @@
     flex-direction: row;
     align-items: center;
 }
+
+.anexo {
+    width: 200px;
+    height: 130px;
+}
+
+.descripcion-paso {
+    width: 70%;
+}

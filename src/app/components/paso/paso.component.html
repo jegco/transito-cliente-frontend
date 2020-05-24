@@ -7,8 +7,8 @@
     <div class="paso-content">
         <h4>{{paso.titulo}}</h4>
         <div class="paso-descripcion">
-            <div [innerHTML]="descripcionComoHTML(paso)"></div>
-            <app-multimedia *ngIf="paso.anexo != null" [anexo]="paso.anexo"></app-multimedia>
+            <div [innerHTML]="descripcionComoHTML(paso)" class="descripcion-paso"></div>
+            <app-multimedia *ngIf="paso.anexo != null" [anexo]="paso.anexo" class="anexo"></app-multimedia>
         </div>
     </div>
 </div>

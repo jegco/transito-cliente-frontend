@@ -16,13 +16,14 @@ export class SearchComponent extends BaseComponent {
 
   constructor(public readonly router: Router,
               public readonly errorService: ErrorService,
-              public readonly toast: ToastrService,
-              private readonly guiasService: GuiasService) {
+              public readonly toast: ToastrService) {
     super(router, errorService, toast);
   }
 
   search(): void {
-    if(this.searchValue == '') this.searchValue = "todos";
+    if (this.searchValue === '') {
+      this.searchValue = 'todos';
+    }
     this.openPage(`/search/${this.searchValue}`);
   }
 
