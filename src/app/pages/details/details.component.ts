@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck, OnChanges } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/errors/services/error.service';
@@ -19,10 +19,10 @@ declare var H: any;
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent extends BaseComponent implements OnInit, DoCheck {
+export class DetailsComponent extends BaseComponent implements OnInit, AfterViewInit {
 
-  guia$: Observable<GuiaDeTramite>;
-  mapRendered: Observable<boolean>;
+  guia: GuiaDeTramite;
+  mapRendered = false;
   descripcion = {};
   platform: any;
   map: any;
@@ -45,24 +45,20 @@ export class DetailsComponent extends BaseComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    this.mapRendered = of(false);
-    this.guia$ = this.activatedRoute.params
+    this.activatedRoute.params
       .pipe(
         map(params => params.nombreGuia),
         switchMap(nombre => this.guiasService.buscarGuiaPorTitulo(nombre)),
         catchError(error => {
           this.handleException(error);
           return of<GuiaDeTramite>();
-        }));
+        })).subscribe(guia => {
+          this.guia = guia;
+          this.añadirMarcador(guia.puntosDeAtencion);
+        });
   }
 
-  ngDoCheck() {
-    // if (this.mapElement) {
-    //   this.initMap();
-    // }
-  }
-
-  initMap() {
+  ngAfterViewInit() {
     const defaultLayers = this.platform.createDefaultLayers();
     this.map = new H.Map(
       this.mapElement.nativeElement,
@@ -82,19 +78,25 @@ export class DetailsComponent extends BaseComponent implements OnInit, DoCheck {
   }
 
   descripcionComoHTML = (guia: GuiaDeTramite): SafeHtml => {
-    // this.añadirMarcador(guia.puntosDeAtencion);
+    this.mapRendered = true;
     return this.sanitizer.bypassSecurityTrustHtml(guia.descripcion);
   }
 
   añadirMarcador = (puntos: PuntoAtencion[]): void => {
     puntos.forEach(punto => {
-      this.map.addObject(new H.map.Marker({
-        lat: punto.latitud,
-        lng: punto.longitud
-      }));
+      this.map.addObject(this.construirMarcador(punto.latitud, punto.longitud));
     });
     // const informacion = this.construirformacionDelMarcador(latitud, longitud);
     // ui.addBubble(informacion);
+  }
+
+  construirMarcador = (latitud: number, longitud: number): any => {
+    const pngIcon = new H.map.Icon('../../../assets/img/DATT.png', { size: { w: 30, h: 30 } });
+
+    return new H.map.Marker({
+      lat: latitud,
+      lng: longitud
+    }, { icon: pngIcon });
   }
 
   descargarArchivo = (documento: Documento): void => {

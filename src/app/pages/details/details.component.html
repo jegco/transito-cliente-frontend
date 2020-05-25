@@ -1,4 +1,4 @@
-<div class="guia-detalles-container" *ngIf="guia$ | async as guia; else loading">
+<div class="guia-detalles-container" *ngIf="guia; else loading">
     <div class="guia-detalles-content">
         <h3>{{guia.titulo}}</h3>
         <div class="descripcion-guia-container">
@@ -6,9 +6,6 @@
             <app-multimedia *ngIf="guia.anexo != null" [anexo]="guia.anexo" class="anexo"></app-multimedia>
         </div>
         <app-paso *ngFor="let paso of guia.pasos; let i = index" [paso]="paso" [index]="i"></app-paso>
-        <!-- <mat-card>
-            <div #map class="mapa-container"></div>
-        </mat-card> -->
         <ng-template #loading>
             <mat-spinner class="spinner"></mat-spinner>
         </ng-template>
@@ -17,5 +14,18 @@
     <div class="soporte-legal-container">
         <h3>Soporte legal</h3>
         <div [innerHTML]="descripcionComoHTML(guia)"></div>
+    </div>
+</div>
+<div class="puntos-atencion-container">
+    <mat-card class="guia-detalles-content">
+        <div #map class="mapa-container"></div>
+    </mat-card>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="soporte-legal-container" *ngIf="guia">
+        <h4>Puntos de atencion de este proceso</h4>
+        <div class="punto-descripcion-container" *ngFor="let punto of guia.puntosDeAtencion">
+            <span>{{punto.nombre}}</span>
+            <span>{{punto.direccion}}</span>
+        </div>
     </div>
 </div>

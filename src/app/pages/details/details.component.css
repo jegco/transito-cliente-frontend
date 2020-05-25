@@ -12,6 +12,13 @@
     background-color: white;
 }
 
+.puntos-atencion-container {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    margin-top: 3%;
+}
+
 .descripcion-guia-container {
     display: flex;
     flex-direction: row;
@@ -92,4 +99,16 @@
 .anexo {
     width: 200px;
     height: 150px;
+}
+
+@media only screen and (max-width: 700px) {
+    .guia-detalles-container {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .guia-detalles-container {
+        flex-direction: row;
+    }
 }
