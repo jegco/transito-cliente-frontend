@@ -17,9 +17,9 @@
     </div>
 </div>
 <div class="puntos-atencion-container">
-    <mat-card class="guia-detalles-content">
+    <div class="guia-detalles-content">
         <div #map class="mapa-container"></div>
-    </mat-card>
+    </div>
     <mat-divider [vertical]="true"></mat-divider>
     <div class="soporte-legal-container" *ngIf="guia">
         <h4>Puntos de atencion de este proceso</h4>
@@ -29,3 +29,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <mat-spinner class="spinner"></mat-spinner>
+</ng-template>

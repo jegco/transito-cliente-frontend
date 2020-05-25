@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck, OnChanges, Input } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/errors/services/error.service';
@@ -9,7 +9,7 @@ import { GuiasService } from 'src/app/providers/guias/guias.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PuntoAtencion } from 'src/app/models/PuntoAtencion';
 import { Documento } from 'src/app/models/Documento';
-import { of, Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { DocumentosService } from 'src/app/providers/documentos/documentos.service';
 
 declare var H: any;
@@ -21,6 +21,7 @@ declare var H: any;
 })
 export class DetailsComponent extends BaseComponent implements OnInit, AfterViewInit {
 
+  @Input()
   guia: GuiaDeTramite;
   mapRendered = false;
   descripcion = {};
@@ -53,6 +54,7 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
           this.handleException(error);
           return of<GuiaDeTramite>();
         })).subscribe(guia => {
+          this.mapRendered = true;
           this.guia = guia;
           this.añadirMarcador(guia.puntosDeAtencion);
         });

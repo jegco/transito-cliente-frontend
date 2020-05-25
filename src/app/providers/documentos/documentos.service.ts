@@ -35,6 +35,6 @@ export class DocumentosService {
   }
 
   descargarDocumento = (documento: Documento): Observable<Blob> => {
-    return this.http.getBlob(`http://${documento.rutaDeDescarga}`);
+    return this.http.getBlob(`${documento.rutaDeDescarga}`);
   }
 }
