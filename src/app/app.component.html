@@ -1,21 +1,12 @@
 <div class="container">
     <div class="toolbar-container">
-        <mat-toolbar class="toolbar">
+        <mat-toolbar class="toolbar" #toolbar>
             <mat-toolbar-row class="toolbar-row">
                 <img src="../../../assets/img/DATT.png" class="datt-logo">
                 <div class="titulo-container">
                     <span class="titulo">Guias de tramites</span>
                     <span class="subtitulo">Transito de Cartagena</span>
                 </div>
-
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu por tipos">
-                    tipos
-                  </button>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item *ngIf="tipos$ | async as tipo">
-                      <span>{{ tipo.nombre }}</span>
-                    </button>
-                  </mat-menu> -->
             </mat-toolbar-row>
         </mat-toolbar>
     </div>

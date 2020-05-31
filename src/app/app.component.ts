@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { PreferenciasService } from './providers/preferencias/preferencias.service';
 import { Observable } from 'rxjs';
@@ -10,22 +10,35 @@ import { filter } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'transito-cliente';
   searchValue = '';
   displaySearch = false;
   tipos$: Observable<Tipo>;
 
-  constructor(private readonly router: Router,
-              private readonly preferenciasService: PreferenciasService) {}
+  @ViewChild('toolbar', { static: false })
+  toolbarRef: ElementRef;
+
+  constructor(
+    private readonly router: Router,
+    private readonly preferenciasService: PreferenciasService,
+    private readonly renderer: Renderer2) { }
 
   ngOnInit() {
-    this.preferenciasService.buscarPreferencias().subscribe();
     this.router.events.pipe(
-    filter(event => event instanceof NavigationStart))
-    .subscribe((event: NavigationStart) => {
-      this.displaySearch = event.url !== '/';
-    });
+      filter(event => event instanceof NavigationStart))
+      .subscribe((event: NavigationStart) => {
+        this.displaySearch = event.url !== '/';
+      });
+  }
+
+  ngAfterViewInit() {
+    this.preferenciasService.buscarPreferencias().subscribe(() => {
+      if (this.toolbarRef) {
+        this.renderer.setStyle(this.toolbarRef._elementRef.nativeElement, 'background-color', localStorage.getItem('colorPrimario'));
+      }
+    }
+    );
   }
 
   navigate = () => {
