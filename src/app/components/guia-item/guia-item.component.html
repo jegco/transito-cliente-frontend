@@ -10,15 +10,16 @@
 </mat-card> -->
 
 <div class="guia-card" (click)="showDetails()">
-    <div class="guia-card-header">
-        <h3>{{guia.titulo}}</h3>
-        <span class="tipo-chip">{{guia.tipo.nombre}}</span>
-    </div>
     <div class="guia-card-content">
+        <h3 class="guia-card-title">{{guia.titulo}}</h3>
         <div class="guia-card-subtitle">
-            <div *ngFor="let puntoAtencion of guia.puntosDeAtencion" class="tipo-chip">{{puntoAtencion.nombre}}</div>
+            <div *ngFor="let puntoAtencion of guia.puntosDeAtencion" class="tipo-chip">{{puntoAtencion.nombre}}
+            </div>
         </div>
         <p class="guia-card-descripcion" [innerHTML]="descripcionComoHTML(guia.descripcion)"></p>
     </div>
-    <mat-divider></mat-divider>
+    <div class="guia-card-categoria">
+        <img [src]="guia.tipo.icono.rutaDeDescarga" class="icono-categoria" alt="guia.tipo.nombre">
+    </div>
 </div>
+<mat-divider></mat-divider>

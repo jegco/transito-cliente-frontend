@@ -2,7 +2,7 @@
     display: flex;
     width: 70%;
     flex-direction: column;
-    padding: 0 5% 0 5%;
+    padding: 0 1% 0 0;
     background-color: white;
 }
 
@@ -28,6 +28,7 @@
 
 .descripcion-guia {
     width: 70%;
+    margin-left: 1%;
 }
 
 .soporte-legal-container {
@@ -52,6 +53,10 @@
     position: relative;
     top: 10%;
     transform: translateY(-50%);
+}
+
+.guia-titulo {
+    margin: 1% 1% 1% 2%;
 }
 
 .guia-pasos-card {
@@ -104,6 +109,23 @@
 @media only screen and (max-width: 700px) {
     .guia-detalles-container {
         flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+    .guia-detalles-content {
+        width: 98%;
+    }
+    .descripcion-guia-container {
+        justify-content: center;
+    }
+    .descripcion-guia {
+        width: 100%;
+    }
+    .soporte-legal-container {
+        width: 98%;
+    }
+    .puntos-atencion-container {
+        flex-direction: column-reverse;
     }
 }
 

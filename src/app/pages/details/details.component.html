@@ -1,6 +1,6 @@
 <div class="guia-detalles-container" *ngIf="guia; else loading">
     <div class="guia-detalles-content">
-        <h3>{{guia.titulo}}</h3>
+        <h3 class="guia-titulo">{{guia.titulo}}</h3>
         <div class="descripcion-guia-container">
             <div class="descripcion-guia" [innerHTML]="descripcionComoHTML(guia)"></div>
             <app-multimedia *ngIf="guia.anexo != null" [anexo]="guia.anexo" class="anexo"></app-multimedia>
