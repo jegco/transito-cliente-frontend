@@ -4,6 +4,7 @@ import { PreferenciasService } from './providers/preferencias/preferencias.servi
 import { Observable } from 'rxjs';
 import { Tipo } from './models/Tipo';
 import { filter } from 'rxjs/operators';
+import { MatToolbar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   tipos$: Observable<Tipo>;
 
   @ViewChild('toolbar', { static: false })
-  toolbarRef: ElementRef;
+  toolbarRef: MatToolbar;
 
   constructor(
     private readonly router: Router,
