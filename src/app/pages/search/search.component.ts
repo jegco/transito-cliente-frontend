@@ -13,11 +13,13 @@ import { GuiasService } from 'src/app/providers/guias/guias.service';
 export class SearchComponent extends BaseComponent {
 
   searchValue = '';
+  colorPrimario;
 
   constructor(public readonly router: Router,
               public readonly errorService: ErrorService,
               public readonly toast: ToastrService) {
     super(router, errorService, toast);
+    this.colorPrimario = localStorage.getItem('colorPrimario');
   }
 
   search(): void {

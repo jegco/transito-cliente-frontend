@@ -20,6 +20,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   guias$: Observable<GuiaDeTramite | GuiaDeTramite[]>;
   tipos$: Observable<Tipo[]>;
   showSpinner = false;
+  searchValue = '';
 
   constructor(public readonly router: Router,
               public readonly errorService: ErrorService,
@@ -45,5 +46,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   showDetails($event: GuiaDeTramite) {
     this.openPage(`/details/${$event.titulo}`, { guia: $event });
   }
+
+  search = () => {}
 
 }
