@@ -15,7 +15,11 @@ export class PasoComponent {
   @Input()
   index: number;
 
-  constructor(private readonly sanitizer: DomSanitizer) { }
+  colorPrimario;
+
+  constructor(private readonly sanitizer: DomSanitizer) {
+    this.colorPrimario = localStorage.getItem('colorPrimario');
+  }
 
   descripcionComoHTML = (paso: Paso) => {
     return this.sanitizer.bypassSecurityTrustHtml(paso.descripcion);

@@ -2,12 +2,12 @@
     <div class="search-container">
         <h1>Buscar guias de tramite</h1>
         <p>Accede a numerosas guias para realizar tu tramite</p>
-        <form class="search-form" (keydown.enter)="search()">
+        <form class="search-form" (keydown.enter)="search()" [@animacion]="{value: animacion, params: {delay: tiempoDeEspera, time: tiempoDeAnimacion}}">
             <input placeholder="Buscar por palabra que haga referencia" [(ngModel)]="searchValue" name="search" class="search-input" />
             <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
                     <mat-icon class="search-icon">close</mat-icon>
                 </button>
-            <button mat-raised-button (click)="search()" class="search-btn">Buscar</button>
+            <button mat-raised-button (click)="search()" class="search-btn" [style.background-color]="colorPrimario">Buscar</button>
         </form>
     </div>
     <div class="img-container">

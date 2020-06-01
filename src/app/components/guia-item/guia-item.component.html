@@ -13,7 +13,7 @@
     <div class="guia-card-content">
         <h3 class="guia-card-title">{{guia.titulo}}</h3>
         <div class="guia-card-subtitle">
-            <div *ngFor="let puntoAtencion of guia.puntosDeAtencion" class="tipo-chip">{{puntoAtencion.nombre}}
+            <div *ngFor="let puntoAtencion of guia.puntosDeAtencion" class="tipo-chip" [style.background-color]="colorSecundario">{{puntoAtencion.nombre}}
             </div>
         </div>
         <p class="guia-card-descripcion" [innerHTML]="descripcionComoHTML(guia.descripcion)"></p>

@@ -5,22 +5,37 @@ import { ErrorService } from 'src/app/errors/services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { GuiasService } from 'src/app/providers/guias/guias.service';
 import { map, switchMap, catchError } from 'rxjs/operators';
+import { keyframes as kf } from '../../animations/keyframes';
 import { GuiaDeTramite } from 'src/app/models/GuiaDeTramite';
 import { Observable, of } from 'rxjs';
 import { TiposService } from 'src/app/providers/tipos/tipos.service';
 import { Tipo } from 'src/app/models/Tipo';
+import { trigger, transition, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    trigger('animacion', [
+      transition('* => swing', animate('{{time}}ms {{delay}}s ease-in', keyframes(kf.swing)), { params: { delay: 10, time: 1000 } }),
+      transition('* => bounce', animate('{{time}}ms {{delay}}s ease-in', keyframes(kf.bounce)), { params: { delay: 10, time: 1000 } }),
+      transition('* => scale', animate('{{time}}ms {{delay}}s ease-in', keyframes(kf.scale)), { params: { delay: 10, time: 1000 } }),
+      transition('* => translate', animate('{{time}}ms {{delay}}s ease-in', keyframes(kf.translate)), { params: { delay: 10, time: 1000 } })
+    ])
+  ]
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
   guias$: Observable<GuiaDeTramite | GuiaDeTramite[]>;
   tipos$: Observable<Tipo[]>;
+  colorPrimario;
+  colorSecundario;
   showSpinner = false;
   searchValue = '';
+  tiempoDeEspera;
+  animacion;
+  tiempoDeAnimacion;
 
   constructor(public readonly router: Router,
               public readonly errorService: ErrorService,
@@ -29,6 +44,11 @@ export class DashboardComponent extends BaseComponent implements OnInit {
               private readonly tiposService: TiposService,
               private activatedRoute: ActivatedRoute) {
     super(router, errorService, toast);
+    this.colorPrimario = localStorage.getItem('colorPrimario');
+    this.colorSecundario = localStorage.getItem('colorSecundario');
+    this.tiempoDeEspera = localStorage.getItem('tiempoEspera');
+    this.tiempoDeAnimacion = localStorage.getItem('tiempoAnimacion');
+    this.animacion = localStorage.getItem('nombreAnimacion');
   }
 
   ngOnInit() {

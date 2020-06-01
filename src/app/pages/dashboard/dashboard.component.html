@@ -1,5 +1,5 @@
 <div *ngIf="guias$ | async as guias; else loading" class="guias-content">
-    <div class="search-container">
+    <div class="search-container" [style.background-color]="colorSecundario">
         <form class="search-form" (keydown.enter)="search()">
             <mat-label>Filtros: </mat-label>
             <mat-form-field *ngIf="tipos$ | async as tipos; else loading">
@@ -14,11 +14,11 @@
             <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
                 <mat-icon class="search-icon">close</mat-icon>
             </button>
-            <button mat-raised-button (click)="search()" class="search-btn">Buscar</button>
+            <button mat-raised-button (click)="search()" class="search-btn" [style.background-color]="colorPrimario">Buscar</button>
         </form>
     </div>
     <div class="guias-container">
-        <app-guia-item class="guia-card" *ngFor="let guia of guias, let i = index" [guia]="guia" (details)="showDetails($event)"></app-guia-item>
+        <app-guia-item class="guia-card" *ngFor="let guia of guias, let i = index" [guia]="guia" (details)="showDetails($event)" [@animacion]="{value: animacion, params: {delay: tiempoDeEspera, time: tiempoDeAnimacion}}"></app-guia-item>
     </div>
     <mat-card *ngIf="guias.length === 0">No se encontraron guias guardadas hasta el momento</mat-card>
 </div>

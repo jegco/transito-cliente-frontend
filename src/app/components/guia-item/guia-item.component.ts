@@ -13,7 +13,11 @@ export class GuiaItemComponent implements OnInit {
   @Input() guia: GuiaDeTramite;
   @Output() details = new EventEmitter<GuiaDeTramite>();
 
-  constructor(private readonly sanitizer: DomSanitizer) { }
+  colorSecundario;
+
+  constructor(private readonly sanitizer: DomSanitizer) {
+    this.colorSecundario = localStorage.getItem('colorSecundario');
+  }
 
   ngOnInit() {
   }

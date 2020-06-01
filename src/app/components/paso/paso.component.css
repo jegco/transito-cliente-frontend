@@ -3,7 +3,7 @@
     height: 0;
     border-top: 60px solid transparent;
     border-bottom: 60px solid transparent;
-    border-left: 60px solid green;
+    border-left: 60px solid;
     margin-right: 1%;
 }
 
@@ -61,7 +61,7 @@
     .guia-detalle-header-image {
         border-top: 30px solid transparent;
         border-bottom: 30px solid transparent;
-        border-left: 30px solid green;
+        border-left: 30px solid;
     }
     .numero-paso {
         font-size: 20px;
