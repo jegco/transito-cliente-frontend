@@ -11,6 +11,7 @@ import { Observable, of } from 'rxjs';
 import { TiposService } from 'src/app/providers/tipos/tipos.service';
 import { Tipo } from 'src/app/models/Tipo';
 import { trigger, transition, animate, keyframes } from '@angular/animations';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,12 +38,13 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   animacion;
   tiempoDeAnimacion;
 
-  constructor(public readonly router: Router,
-              public readonly errorService: ErrorService,
-              public readonly toast: ToastrService,
-              private readonly guiasService: GuiasService,
-              private readonly tiposService: TiposService,
-              private activatedRoute: ActivatedRoute) {
+  constructor(
+    public readonly router: Router,
+    public readonly errorService: ErrorService,
+    public readonly toast: ToastrService,
+    private readonly guiasService: GuiasService,
+    private readonly tiposService: TiposService,
+    private activatedRoute: ActivatedRoute) {
     super(router, errorService, toast);
     this.colorPrimario = localStorage.getItem('colorPrimario');
     this.colorSecundario = localStorage.getItem('colorSecundario');
@@ -55,6 +57,13 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     this.guias$ = this.activatedRoute.params.pipe(
       map(params => params.searchParam),
       switchMap(searchParam => this.guiasService.buscarGuias(searchParam)),
+      map(guias => {
+        guias.map(guia => {
+          guia.tipo.icono.rutaDeDescarga = environment.serverUrl + '/documentos/resource/' + guia.tipo.icono.nombre;
+          return guia;
+        });
+        return guias;
+      }),
       catchError(error => {
         this.handleException(error);
         return of<GuiaDeTramite>();
@@ -67,6 +76,19 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     this.openPage(`/details/${$event.titulo}`, { guia: $event });
   }
 
-  search = () => {}
+  search = () => {
+    this.guias$ = this.guiasService.buscarGuias(this.searchValue).pipe(
+      map(guias => {
+        guias.map(guia => {
+          guia.tipo.icono.rutaDeDescarga = environment.serverUrl + '/documentos/resource/' + guia.tipo.icono.nombre;
+          return guia;
+        });
+        return guias;
+      }),
+      catchError(error => {
+        this.handleException(error);
+        return of<GuiaDeTramite>();
+      }));
+  }
 
 }

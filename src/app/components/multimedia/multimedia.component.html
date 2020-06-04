@@ -7,7 +7,7 @@
             <p>{{anexo.nombre}}</p>
         </mat-card-actions>
     </mat-card>
-    <img [src]="anexo.rutaDeDescarga" (click)="showModal()" class="image" alt="anexo-guia" *ngIf="anexo.extension === 'png' || anexo.extension === 'jpg' ">
+    <img [src]="image" (click)="showModal()" class="image" alt="anexo-guia" *ngIf="anexo.extension === 'png' || anexo.extension === 'jpg'" (load)="onLoad()">
 </div>
 <!-- The Modal -->
 <div #modal id="myModal" class="modal">

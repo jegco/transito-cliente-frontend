@@ -1,22 +1,22 @@
+<div class="search-container" [style.background-color]="colorSecundario">
+    <form class="search-form" (keydown.enter)="search()">
+        <mat-label>Filtros: </mat-label>
+        <mat-form-field *ngIf="tipos$ | async as tipos; else loading">
+            <mat-label>Categorias</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+                    {{tipo.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <input placeholder="Buscar por palabra que haga referencia" [(ngModel)]="searchValue" name="search" class="search-input" />
+        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+            <mat-icon class="search-icon">close</mat-icon>
+        </button>
+        <button mat-raised-button (click)="search()" class="search-btn" [style.background-color]="colorPrimario">Buscar</button>
+    </form>
+</div>
 <div *ngIf="guias$ | async as guias; else loading" class="guias-content">
-    <div class="search-container" [style.background-color]="colorSecundario">
-        <form class="search-form" (keydown.enter)="search()">
-            <mat-label>Filtros: </mat-label>
-            <mat-form-field *ngIf="tipos$ | async as tipos; else loading">
-                <mat-label>Categorias</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
-                        {{tipo.nombre}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <input placeholder="Buscar por palabra que haga referencia" [(ngModel)]="searchValue" name="search" class="search-input" />
-            <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-                <mat-icon class="search-icon">close</mat-icon>
-            </button>
-            <button mat-raised-button (click)="search()" class="search-btn" [style.background-color]="colorPrimario">Buscar</button>
-        </form>
-    </div>
     <div class="guias-container">
         <app-guia-item class="guia-card" *ngFor="let guia of guias, let i = index" [guia]="guia" (details)="showDetails($event)" [@animacion]="{value: animacion, params: {delay: tiempoDeEspera, time: tiempoDeAnimacion}}"></app-guia-item>
     </div>

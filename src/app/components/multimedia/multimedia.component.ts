@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { Documento } from 'src/app/models/Documento';
 import { DocumentosService } from 'src/app/providers/documentos/documentos.service';
 
@@ -7,7 +7,7 @@ import { DocumentosService } from 'src/app/providers/documentos/documentos.servi
   templateUrl: './multimedia.component.html',
   styleUrls: ['./multimedia.component.css']
 })
-export class MultimediaComponent{
+export class MultimediaComponent implements OnInit {
 
   @Input()
   anexo: Documento;
@@ -15,7 +15,16 @@ export class MultimediaComponent{
   @ViewChild('modal', {static: false})
   modalRef: ElementRef;
 
+  loadingStyle: string;
+  loading = true;
+  image: string;
+
   constructor(private readonly documentosService: DocumentosService) { }
+
+  ngOnInit(): void {
+    this.image = this.anexo.rutaDeDescarga;
+    this.loadingStyle = `rotate`;
+  }
 
   showModal = () => {
     this.modalRef.nativeElement.style.display = 'block';
@@ -26,7 +35,6 @@ export class MultimediaComponent{
   }
 
   descargarArchivo = (documento: Documento): void => {
-    debugger;
     this.documentosService.descargarDocumento(documento).subscribe(
       data => {
         const blob = new Blob([data], { type: 'application/pdf' });
@@ -42,5 +50,17 @@ export class MultimediaComponent{
         }, 100);
       });
   }
+
+  onLoad() {
+    this.loading = false;
+  }
+
+  // onError(){
+  //   if(!!this.defaultImage){
+  //     this.imageSource = this.defaultImage;
+  //   } else {
+  //     this.imageSource = 'assets/img/user.svg';
+  //   }
+  // }
 
 }
