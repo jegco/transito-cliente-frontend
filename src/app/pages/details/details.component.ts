@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, DoCheck, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/errors/services/error.service';
 import { ToastrService } from 'ngx-toastr';
-import { map, switchMap, catchError, defaultIfEmpty } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { GuiaDeTramite } from 'src/app/models/GuiaDeTramite';
 import { GuiasService } from 'src/app/providers/guias/guias.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PuntoAtencion } from 'src/app/models/PuntoAtencion';
 import { Documento } from 'src/app/models/Documento';
-import { of, empty } from 'rxjs';
+import { of } from 'rxjs';
 import { DocumentosService } from 'src/app/providers/documentos/documentos.service';
 import { environment as Env } from 'src/environments/environment';
-import { error } from 'util';
 
 declare var H: any;
 

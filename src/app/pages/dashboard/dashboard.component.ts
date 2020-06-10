@@ -80,6 +80,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   }
 
   search = () => {
+    this.hasError = false;
+    this.showSpinner = true;
     if (this.searchValue === '') {
       this.searchValue = 'todos';
     }
@@ -89,10 +91,12 @@ export class DashboardComponent extends BaseComponent implements OnInit {
           guia.tipo.icono.rutaDeDescarga = environment.serverUrl + '/documentos/resource/' + guia.tipo.icono.nombre;
           return guia;
         });
+        this.showSpinner = false;
         return guias;
       }),
       catchError(error => {
         this.handleException(error);
+        this.hasError = true;
         return of<GuiaDeTramite>();
       }));
   }
