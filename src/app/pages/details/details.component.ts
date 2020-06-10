@@ -3,15 +3,16 @@ import { BaseComponent } from '../base/base.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorService } from 'src/app/errors/services/error.service';
 import { ToastrService } from 'ngx-toastr';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, defaultIfEmpty } from 'rxjs/operators';
 import { GuiaDeTramite } from 'src/app/models/GuiaDeTramite';
 import { GuiasService } from 'src/app/providers/guias/guias.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PuntoAtencion } from 'src/app/models/PuntoAtencion';
 import { Documento } from 'src/app/models/Documento';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { DocumentosService } from 'src/app/providers/documentos/documentos.service';
 import { environment as Env } from 'src/environments/environment';
+import { error } from 'util';
 
 declare var H: any;
 
@@ -51,10 +52,13 @@ export class DetailsComponent extends BaseComponent implements OnInit, AfterView
       .pipe(
         map(params => params.nombreGuia),
         switchMap(nombre => this.guiasService.buscarGuiaPorTitulo(nombre)),
+        // defaultIfEmpty(null),
         catchError(error => {
           this.handleException(error);
+          this.openPage('/dashboard');
           return of<GuiaDeTramite>();
-        })).subscribe(guia => {
+        })
+        ).subscribe(guia => {
           this.mapRendered = true;
           guia.anexo.rutaDeDescarga = Env.serverUrl + '/documentos/resource/' + guia.anexo.nombre;
           this.guia = guia;

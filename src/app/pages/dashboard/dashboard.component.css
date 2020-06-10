@@ -55,4 +55,10 @@
     .guias-container {
         width: 95%;
     }
+    .filtro-label {
+        display: none;
+    }
+    .categorias-select {
+        width: 40%;
+    }
 }

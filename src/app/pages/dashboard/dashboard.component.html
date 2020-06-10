@@ -1,7 +1,7 @@
 <div class="search-container" [style.background-color]="colorSecundario">
     <form class="search-form" (keydown.enter)="search()">
-        <mat-label>Filtros: </mat-label>
-        <mat-form-field *ngIf="tipos$ | async as tipos; else loading">
+        <mat-label class="filtro-label">Filtros: </mat-label>
+        <mat-form-field *ngIf="tipos$ | async as tipos; else loading" class="categorias-select">
             <mat-label>Categorias</mat-label>
             <mat-select>
                 <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
@@ -20,8 +20,10 @@
     <div class="guias-container">
         <app-guia-item class="guia-card" *ngFor="let guia of guias, let i = index" [guia]="guia" (details)="showDetails($event)" [@animacion]="{value: animacion, params: {delay: tiempoDeEspera, time: tiempoDeAnimacion}}"></app-guia-item>
     </div>
-    <mat-card *ngIf="guias.length === 0">No se encontraron guias guardadas hasta el momento</mat-card>
+</div>
+<div *ngIf="hasError" class="guias-content">
+    <mat-card>No se encontraron guias guardadas hasta el momento</mat-card>
 </div>
 <ng-template #loading>
-    <mat-spinner class="spinner"></mat-spinner>
+    <mat-spinner class="spinner" *ngIf="showSpinner"></mat-spinner>
 </ng-template>

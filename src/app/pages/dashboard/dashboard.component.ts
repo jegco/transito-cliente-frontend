@@ -32,7 +32,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   tipos$: Observable<Tipo[]>;
   colorPrimario;
   colorSecundario;
-  showSpinner = false;
+  showSpinner = true;
+  hasError = false;
   searchValue = '';
   tiempoDeEspera;
   animacion;
@@ -66,6 +67,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       }),
       catchError(error => {
         this.handleException(error);
+        this.hasError = true;
+        this.showSpinner = false;
         return of<GuiaDeTramite>();
       }));
 
@@ -77,6 +80,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   }
 
   search = () => {
+    if (this.searchValue === '') {
+      this.searchValue = 'todos';
+    }
     this.guias$ = this.guiasService.buscarGuias(this.searchValue).pipe(
       map(guias => {
         guias.map(guia => {
